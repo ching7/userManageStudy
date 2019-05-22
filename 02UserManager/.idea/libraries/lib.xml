@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://C:/apache-tomcat-7.0.93/lib" />
+      <root url="jar://$USER_HOME$/Desktop/JavaWeb联系_信息管理系统/资料/01-资料/mysql-connector-java-5.1.30.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/JavaWeb联系_信息管理系统/资料/01-资料/log4j-1.2.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://C:/apache-tomcat-7.0.93/lib" recursive="false" />
+  </library>
+</component>
