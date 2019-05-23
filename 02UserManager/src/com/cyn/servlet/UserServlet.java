@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "UserServlet",urlPatterns = "/userServlet")
 public class UserServlet extends HttpServlet {
@@ -27,6 +28,7 @@ public class UserServlet extends HttpServlet {
         //获取请求信息
         //获取请求操作符
         String oper  = req.getParameter("oper");
+        System.out.println("操作符:"+oper);
         if (oper.equals("login")){
             //调用登陆处理
             checkUserLogin(req,resp);
@@ -34,6 +36,10 @@ public class UserServlet extends HttpServlet {
             //调用注册处理
         }else if (oper.equals("loginOut")){
             userLoginOut(req,resp);
+        }else if(oper.equals("pwd")){
+            userChangePwd(req,resp);
+        }else if (oper.equals("showAllUser")){
+            userShowAllUser(req,resp);
         }else{
             logger.debug("未找到对应操作符");
             System.out.println("未找到对应操作符");
@@ -43,6 +49,35 @@ public class UserServlet extends HttpServlet {
             //直接响应
             //请求转发
             //重定向
+    }
+
+    /**
+     * 显示所有用户信息
+     * @param req
+     * @param resp
+     */
+    private void userShowAllUser(HttpServletRequest req, HttpServletResponse resp) {
+        List<User> userList = userService.showAllUser();
+    }
+
+    /**
+     * 修改用户密码
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
+    private void userChangePwd(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //获取新密码
+        String newPwd = req.getParameter("newPwd");
+        //session获取uid
+        User user = (User)req.getSession().getAttribute("user");
+        int uid = user.getUid();
+        int index = userService.userChangePwdService(uid,newPwd);
+        if (index>0){
+            HttpSession httpSession = req.getSession();
+            httpSession.setAttribute("pwd","true");
+            resp.sendRedirect("/index.jsp");
+        }
     }
 
     private void userLoginOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -46,11 +46,18 @@
             <ul>
                 <li><span>
                     <%
-                        String errMessage = "";
                         if (request.getAttribute("flag")!=null){
-                            errMessage = "用户名或密码错误";
                     %>
                     用户名或密码错误
+                    <%
+                        }
+
+                    %>
+                    <%
+                        if (request.getSession().getAttribute("pwd")!=null){
+                            session.removeAttribute("pwd");
+                    %>
+                    密码修改成功
                     <%
                         }
 

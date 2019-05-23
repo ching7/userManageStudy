@@ -69,19 +69,19 @@
 
     <dd>
         <div class="title">
-            <span><img src="images/leftico01.png" /></span>个人信息
+            <span><img src="/images/leftico01.png" /></span>个人信息
         </div>
         <ul class="menuson">
-            <li><cite></cite><a href="tab.html" target="rightFrame">查看个人信息</a><i></i></li>
-            <li><cite></cite><a href="error.html" target="rightFrame">修改密码</a><i></i></li>
+            <li><cite></cite><a href="/user/userinfo.jsp" target="rightFrame">查看个人信息</a><i></i></li>
+            <li><cite></cite><a href="/user/pwd.jsp" target="rightFrame">修改密码</a><i></i></li>
         </ul>
     </dd>
     <dd>
         <div class="title">
-            <span><img src="images/leftico01.png" /></span>管理信息
+            <span><img src="/images/leftico01.png" /></span>管理信息
         </div>
         <ul class="menuson">
-            <li><cite></cite><a href="error.html" target="rightFrame">查看所有用户信息</a><i></i></li>
+            <li><cite></cite><a href="userServlet?oper=showAllUser" target="rightFrame">查看所有用户信息</a><i></i></li>
         </ul>
     </dd>
 </dl>
