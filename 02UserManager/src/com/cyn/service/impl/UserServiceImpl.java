@@ -53,4 +53,15 @@ public class UserServiceImpl implements UserService {
         logger.debug("显示所用用户信息："+userList);
         return userDao.showAllUserDao();
     }
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    @Override
+    public int userRegService(User user) {
+
+        return  userDao.userRegDao(user);
+    }
 }

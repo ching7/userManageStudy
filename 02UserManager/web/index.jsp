@@ -62,6 +62,15 @@
                         }
 
                     %>
+                    <%
+                        if (request.getSession().getAttribute("reg")!=null){
+                            session.removeAttribute("reg");
+                    %>
+                    注册成功
+                    <%
+                        }
+
+                    %>
                 </span></li>
             <%--value="密码" onclick="JavaScript:this.value=''"--%>
                 <li><input name="uname" type="text" class="loginuser" placeholder="用户名"/></li>
@@ -69,7 +78,8 @@
                 <li class="yzm">
                     <span><input name="" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite>X3D5S</cite>
                 </li>
-                <li><input name="" type="submit" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
+                <li><input name="" type="submit" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'"  /><label><a
+                        href="/user/regist.jsp">注册</a></label><label><a href="#">忘记密码？</a></label></li>
             </ul>
         </form>
     </div>

@@ -19,4 +19,11 @@ public interface UserDao {
      * @return
      */
     List<User> showAllUserDao();
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    int userRegDao(User user);
 }

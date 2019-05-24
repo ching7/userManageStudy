@@ -32,14 +32,14 @@ public class UserServlet extends HttpServlet {
         if (oper.equals("login")){
             //调用登陆处理
             checkUserLogin(req,resp);
-        }else if (oper.equals("reg")){
-            //调用注册处理
         }else if (oper.equals("loginOut")){
             userLoginOut(req,resp);
         }else if(oper.equals("pwd")){
             userChangePwd(req,resp);
         }else if (oper.equals("showAllUser")){
             userShowAllUser(req,resp);
+        }else if(oper.equals("reg")){
+            userReg(req,resp);
         }else{
             logger.debug("未找到对应操作符");
             System.out.println("未找到对应操作符");
@@ -52,12 +52,56 @@ public class UserServlet extends HttpServlet {
     }
 
     /**
+     * 用户注册
+     * @param req
+     * @param resp
+     */
+    private void userReg(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        //获取请求信息
+        String uname = req.getParameter("uname");
+        String pwd = req.getParameter("pwd");
+        String sex = req.getParameter("sex");
+        int age = req.getParameter("age")!=""?(Integer.parseInt( req.getParameter("age"))):0;
+
+        String birth = req.getParameter("birth");
+        if (!birth.equals("")){
+            String[] tempStr =  birth.split("/");
+            birth = tempStr[2]+"-"+tempStr[0] +"-"+tempStr[1];
+        }else{
+            birth = "2000-01-01";
+        }
+        System.out.println(birth);
+        User user = new User();
+        user.setUname(uname);
+        user.setPwd(pwd);
+        user.setSex(sex);
+        user.setAge(age);
+        user.setBrith(birth);
+
+        int index =  userService.userRegService(user);
+        System.out.println(uname+":"+pwd+":"+sex+":"+":"+age+":"+birth);
+        if (index>0){
+            HttpSession session = req.getSession();
+            session.setAttribute("reg",true);
+            //重定向到登陆
+            resp.sendRedirect("/index.jsp");
+            return;
+        }
+    }
+
+    /**
      * 显示所有用户信息
      * @param req
      * @param resp
      */
-    private void userShowAllUser(HttpServletRequest req, HttpServletResponse resp) {
+    private void userShowAllUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> userList = userService.showAllUser();
+        if(userList!=null){
+            //查询数据存储
+            req.setAttribute("userList",userList);
+            req.getRequestDispatcher("/user/showAllUser.jsp").forward(req,resp);
+            return;
+        }
     }
 
     /**

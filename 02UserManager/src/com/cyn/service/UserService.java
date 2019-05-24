@@ -23,4 +23,12 @@ public interface UserService {
      * @return
      */
     List<User> showAllUser();
+
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    int userRegService(User user);
 }

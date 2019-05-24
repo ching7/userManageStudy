@@ -92,10 +92,10 @@ public class User {
 
     public User() {
         this.uid = uid;
-        this.uname = uname;
-        this.pwd = pwd;
-        this.sex = sex;
-        this.age = age;
+        this.uname = this.uname;
+        this.pwd = this.pwd;
+        this.sex = this.sex;
+        this.age = this.age;
         this.brith = brith;
     }
 }

@@ -169,4 +169,47 @@ public class UserDaoImpl implements UserDao {
         //返回结果
         return userList;
     }
+
+    @Override
+    public int userRegDao(User user) {
+        //声明jdbc对象
+        Connection connection =null;
+        PreparedStatement preparedStatement = null;
+        //声明变量
+        int index = -1;
+        //加载驱动
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            //获取连接
+            connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb?characterEncoding=utf8","root","123");
+            //创建sql
+            String sql = "insert into t_user values(default,?,?,?,?,?)";
+            //创建 sql命令对象
+            preparedStatement = connection.prepareStatement(sql);
+            //占位置赋值
+            preparedStatement.setString(1,user.getUname());
+            preparedStatement.setString(2,user.getPwd());
+            preparedStatement.setString(3,user.getSex());
+            preparedStatement.setInt(4,user.getAge());
+            preparedStatement.setString(5,user.getBrith());
+            System.out.println(user);
+            //执行
+            index = preparedStatement.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+        //关闭资源
+        try {
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        return index;
+    }
 }
