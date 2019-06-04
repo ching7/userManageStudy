@@ -1,7 +1,8 @@
 <%@ page import="com.cyn.bean.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.HashMap" %><%--
+<%@ page import="java.util.HashMap" %>
+<%--
   Created by IntelliJ IDEA.
   User: 77560
   Date: 2019-06-01
@@ -32,10 +33,8 @@
     EL表达式
 
     作用：获取作用域内的数据
-
     注意：获取的是pageContext,request,session,application 四个对象中的数据，其他以改不理会
     找到了则获取返回，找不到则什么都不做
-
     语法：${表达式}
         表达式：
             request对象：存储请求数据，----> param.键名 （一键一值）
@@ -47,13 +46,19 @@
                 ${键名} ----> list集合${键名[角标]}
                 ${键名} ----> map集合${键名.map集合储存的键名}
 
+
     作用域查找顺序：
-
     默认查找顺序：
-    EL按作用域的大小去依次查找数据
+    EL按作用域的大小去依次查找数据,找到就结束
     （注意作用域的持续时间）
-
+        pageContext - request - session - application
     指定查找顺序：
+        需要查找的作用域名+Scope
+
+    EL表达式的逻辑运算：
+        ${逻辑表达式}
+        ${算数表达式}
+        注: + 表示加法运算，不能表示字符拼接。字符拼接会报错
 --%>
 <h3>EL表达式学习：EL表达式（获取作用域的数据）</h3>
 <b>${param.uname}</b>
@@ -73,10 +78,10 @@
 
 <h3>EL表达式学习：EL作用查找顺序</h3>
 <%
-    <%--
-    EL按作用域的大小去依次查找数据
-    （注意作用域的持续时间）
-    --%>
+
+    /*EL按作用域的大小去依次查找数据
+    （注意作用域的持续时间）*/
+
     pageContext.setAttribute("hello","pageContext");
     request.setAttribute("hello","request");
     session.setAttribute("hello","session");
@@ -84,4 +89,7 @@
 
 %>
 ${hello}
-${requestScope.hello}
+${applicationScope.hello}
+
+<h3>EL表达式的逻辑运算</h3>
+${a+b}--${2+3}--${1*2}--${4/2}--${4-6}--${3%4}--${4==4}--${4>2}--${1+'222'}
