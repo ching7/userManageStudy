@@ -59,6 +59,20 @@
         ${逻辑表达式}
         ${算数表达式}
         注: + 表示加法运算，不能表示字符拼接。字符拼接会报错
+        空值判断：
+        ${empty 键名}: 判断键名是否有数据
+
+    EL获取请求头数据和cookie数据：
+        请求头数据:
+            ${header}--所有请求头的数据
+            ${header['键名']}--返回指定键名的请求头数据
+            ${headerValues['键名']}返回指定键名的请求头数据，同名键返回数组
+        获取cookie值：
+            ${cookie} -- 返回所有存储的cookieMap集合
+            ${cookie.键名} -- 返回所指定的cookie
+            ${cookie.键名.name} -- 返回所指定的cookie key
+            ${cookie.键名.value} -- 返回所指定的cookie value
+
 --%>
 <h3>EL表达式学习：EL表达式（获取作用域的数据）</h3>
 <b>${param.uname}</b>
@@ -93,3 +107,13 @@ ${applicationScope.hello}
 
 <h3>EL表达式的逻辑运算</h3>
 ${a+b}--${2+3}--${1*2}--${4/2}--${4-6}--${3%4}--${4==4}--${4>2}--${1+'222'}
+<br>
+<h3>空值判断</h3>
+${empty emptyStr}--${empty emptyUser}--${empty emptyUserList}
+<br>
+<h3>EL获取请求头数据和cookie数据</h3>
+${header}<br>######################
+${header['user-agent']}<br>
+
+
+${cookie}--${cookie.JSESSIONID}--${cookie.JSESSIONID.name}--${cookie.JSESSIONID.value}

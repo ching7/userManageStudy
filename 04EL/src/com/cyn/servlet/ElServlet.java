@@ -72,6 +72,10 @@ public class ElServlet extends javax.servlet.http.HttpServlet {
                 Map<String,User> strMap1 = new HashMap<String,User>();
                 strMap1.put("daYe",user1);
                 req.setAttribute("userMap",strMap1);
+            //空值判断：
+                req.setAttribute("emptyStr","");
+                req.setAttribute("emptyUser",new User());
+                req.setAttribute("emptyUserList",new ArrayList<>());
 
         //直接响应
             //请求转发
